@@ -33,7 +33,6 @@
     },
     "express": {
       "adapter": "vscode-node",
-      "default": true,
       "breakpoints": {
         "exception": {
           "all": "N",
