@@ -1,0 +1,52 @@
+{
+  "configurations": {
+    "node": {
+      "adapter": "vscode-node",
+      "breakpoints": {
+        "exception": {
+          "all": "N",
+          "uncaught": "N"
+        }
+      },
+      "configuration": {
+        "request": "launch",
+        "protocol": "auto",
+        "stopOnEntry": true,
+        "console": "integratedTerminal",
+        "program": "${workspaceRoot}/index.js",
+        "cwd": "${workspaceRoot}"
+      }
+    },
+    "chrome": {
+      "adapter": "chrome",
+      "breakpoints": {
+        "exception": {
+          "all": "N",
+          "uncaught": "N"
+        }
+      },
+      "configuration": {
+        "request": "launch",
+        "url": "http://localhost:4000/",
+        "webRoot": "${workspaceRoot}/public"
+      }
+    },
+    "express": {
+      "adapter": "vscode-node",
+      "default": true,
+      "breakpoints": {
+        "exception": {
+          "all": "N",
+          "uncaught": "N"
+        }
+      },
+      "configuration": {
+        "name": "Attaching to a process ID",
+        "type": "node",
+        "request": "attach",
+        "skipFiles": ["node_modules/**/*.js", "<node_internals>/**/*.js"],
+        "processId": "${processId}"
+      }
+    }
+  }
+}
