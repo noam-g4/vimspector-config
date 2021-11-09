@@ -29,7 +29,7 @@ function run(args, data = template) {
   if (arguments.program && content.configurations.node)
     content.configurations.node.configuration.program = `\${workspaceRoot}/${arguments.program}`
 
-  return create(filename, content)
+  return create(content)
 }
 
 run(args)

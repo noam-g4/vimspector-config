@@ -8,10 +8,10 @@ const {
 const makeFile = data =>
   writeFileSync('./.vimspector.json', JSON.stringify(data, null, 4))
 
-const setGitIgnore = filename => {
+const setGitIgnore = () => {
   const p = './.gitignore'
-  if (existsSync(p) && !readFileSync(p).includes(filename))
-    appendFileSync(p, filename)
+  if (existsSync(p) && !readFileSync(p).includes('.vimspector.json'))
+    appendFileSync(p, '.vimspector.json')
 }
 
 module.exports.parseArgs = args =>
@@ -23,7 +23,7 @@ module.exports.parseArgs = args =>
     return y
   }, {})
 
-module.exports.create = (filename, data) => {
-  makeFile(data, filename)
-  setGitIgnore(filename)
+module.exports.create = data => {
+  makeFile(data)
+  setGitIgnore()
 }
