@@ -1,4 +1,3 @@
-const path = require('path')
 const {
   writeFileSync,
   existsSync,
@@ -6,11 +5,11 @@ const {
   readFileSync,
 } = require('fs')
 
-const makeFile = (data, filename) =>
-  writeFileSync(path.join(__dirname, filename), JSON.stringify(data, null, 4))
+const makeFile = data =>
+  writeFileSync('./.vimspector.json', JSON.stringify(data, null, 4))
 
 const setGitIgnore = filename => {
-  const p = path.join(__dirname, '.gitignore')
+  const p = './.gitignore'
   if (existsSync(p) && !readFileSync(p).includes(filename))
     appendFileSync(p, filename)
 }

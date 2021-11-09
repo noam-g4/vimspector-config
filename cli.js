@@ -2,11 +2,10 @@
 const template = require('./template.json')
 const { create, parseArgs } = require('./script.js')
 
-const filename = '.vimspector.json'
 const [, , ...args] = process.argv
 const adapters = ['node', 'chrome', 'express']
 
-function run(filename, args, data = template) {
+function run(args, data = template) {
   const content = {...data}
   const arguments = parseArgs(args)
 
@@ -33,4 +32,4 @@ function run(filename, args, data = template) {
   return create(filename, content)
 }
 
-run(filename, args)
+run(args)
