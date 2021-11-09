@@ -1,6 +1,6 @@
 {
   "name": "vimspector-config",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "a cli that automatically creates .vimspector.json files for a web-app environment",
   "main": "cli.js",
   "bin": "cli.js",
