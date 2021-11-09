@@ -133,6 +133,7 @@ this will create the following *.vimspector.json* in the root directory:
   }
 }
 ```
-for an **express** app configs, we should create another, you should have and ```express``` setup (```--setup=express```)<br/>
+*(hint)*
+for an **express** app configs, you should have add ```express``` to the setup flag (```--setup=express```)<br/>
 when you launch **vimspector**, you should choose *express* and **vimspector** will ask you to enter the **processID** <br/>
 this *processID* the url of the ```node --inpect index.js``` file 
