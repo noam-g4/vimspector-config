@@ -1,12 +1,15 @@
 {
   "name": "vimspector-config",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "a cli that automatically creates .vimspector.json files for a web-app environment",
   "main": "cli.js",
   "bin": "cli.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/noam-g4/vimspector-config.git"
+  },
+  "scripts": {
+    "start": "node cli.js"
   },
   "keywords": [
     "debugger",

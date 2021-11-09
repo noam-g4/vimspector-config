@@ -1,4 +1,4 @@
-#!usr/bin/env node
+#!/usr/bin/env node
 const template = require('./template.json')
 const { create, parseArgs } = require('./script.js')
 
