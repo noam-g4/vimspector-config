@@ -44,7 +44,6 @@ by default, this will create the following *.vimspector.json* file inside this d
     },
     "express": {
       "adapter": "vscode-node",
-      "default": true,
       "breakpoints": {
         "exception": {
           "all": "N",
@@ -82,8 +81,9 @@ let's say we have this project tree:
 ~/project: tree
 .
 ├── client
-│   ├── index.html
-│   └── script.js
+|   ├── public
+│       ├── index.html
+│       └── script.js
 ├── server
 │   ├── express-app.js
 │   └── index.js
@@ -91,31 +91,13 @@ let's say we have this project tree:
     ├── index.js
     └── src
 ```
-suppose ```client``` is a web app, ```server``` is an express app and ```streamer``` is a node utility project.<br />
-I'd like to create a *.vimspector.json* with configurations to support all 3 projects.<br />
-for the ```client``` and the regular node project ```streamer``` I can ```cd``` to the root directory (named *"project"*)<br />
-and run ```npx vimspector-config --setup=node-chrome --webroot=client --program=streamer/index.js```<br />
+suppose ```client``` is a web app where the static assets are serverd inside the "public" directory and ```server``` is an express app.<br />
+I'd like to create a *.vimspector.json* with configurations to support a chrome debugger and an express server (node debugger).<br />
+In root directory I'll run ```npx vimspector-config --setup=express-chrome --webroot=client/public```<br />
 this will create the following *.vimspector.json* in the root directory: 
 ```json
 {
   "configurations": {
-    "node": {
-      "adapter": "vscode-node",
-      "breakpoints": {
-        "exception": {
-          "all": "N",
-          "uncaught": "N"
-        }
-      },
-      "configuration": {
-        "request": "launch",
-        "protocol": "auto",
-        "stopOnEntry": true,
-        "console": "integratedTerminal",
-        "program": "${workspaceRoot}/streamer/index.js",
-        "cwd": "${workspaceRoot}"
-      }
-    },
     "chrome": {
       "adapter": "chrome",
       "breakpoints": {
@@ -127,13 +109,30 @@ this will create the following *.vimspector.json* in the root directory:
       "configuration": {
         "request": "launch",
         "url": "http://localhost:4000/",
-        "webRoot": "${workspaceRoot}/client"
+        "webRoot": "${workspaceRoot}/client/public"
+      }
+    },
+    "express": {
+      "adapter": "vscode-node",
+      "breakpoints": {
+        "exception": {
+          "all": "N",
+          "uncaught": "N"
+        }
+      },
+      "configuration": {
+        "name": "Attaching to a process ID",
+        "type": "node",
+        "request": "attach",
+        "skipFiles": ["node_modules/**/*.js", "<node_internals>/**/*.js"],
+        "processId": "${processId}"
       }
     }
   }
 }
 ```
-*(hint)*
-for an **express** app configs, you should add ```express``` to the setup flag (```--setup=express```)<br/>
-when you launch **vimspector**, you should choose *express* and **vimspector** will ask you to enter the **processID** <br/>
-this *processID* is the url from running ```node --inpect index.js```
+
+from this point, you're good to go
+* if you want to start the chrome debugger -> launch your client web server (on the same port as the debugger) -> launch Vimspector and choose "chrome"
+* if you want to start the express debuger -> launch your express app with the ```--inspect``` flag -> fire up Vimspector, choose "express" -> Vimspector will ask you for a ```processID``` -> copy the one from the ```node --inpect``` process that you've started and start debugging! 😎
+* (to start a normal integrated terminal node debugger, make a .vimspector.json with "node" settings (```--setup=node```), point the debugger to the program you want by running ```--program=/path_to_main_file``` and start Vimspector with the "node" configuration. 
