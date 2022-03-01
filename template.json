@@ -46,6 +46,16 @@
         "skipFiles": ["node_modules/**/*.js", "<node_internals>/**/*.js"],
         "processId": "${processId}"
       }
+    },
+    "go": {
+      "adapter": "vscode-go",
+      "configuration": {
+        "request": "launch",
+        "program": "${main}",
+        "mode": "debug",
+        "dlvToolPath": "${dlvPath}",
+        "dlvFlags": ["--check-go-version=false"]
+      }
     }
   }
 }
