@@ -11,7 +11,7 @@ const makeFile = data =>
 const setGitIgnore = () => {
   const p = './.gitignore'
   if (existsSync(p) && !readFileSync(p).includes('.vimspector.json'))
-    appendFileSync(p, '.vimspector.json')
+    appendFileSync(p, '\n.vimspector.json')
 }
 
 module.exports.parseArgs = args =>
